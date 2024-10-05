@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix
+import pickle
 
 # Load dataset
 df = pd.read_csv('news_dataset.csv')
@@ -27,13 +28,9 @@ model.fit(X_train_tfidf, y_train)
 # Predictions and Evaluation
 y_pred = model.predict(X_test_tfidf)
 accuracy = accuracy_score(y_test, y_pred)
-
 print(f'Accuracy: {accuracy * 100:.2f}%')
-print('Confusion Matrix:')
-print(confusion_matrix(y_test, y_pred))
 
 # Save the model and vectorizer
-import pickle
 with open('model.pkl', 'wb') as model_file:
     pickle.dump(model, model_file)
 
